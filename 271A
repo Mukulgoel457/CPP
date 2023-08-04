@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+ 
+int main(){
+int y=0,x=0,k=0;
+cin>>y;
+k = y+1;
+y=k;
+int a[4];
+while(y>0){
+for(int i=0;i<4;i++){
+        x=y%10;
+        y=y/10;
+        a[3-i]=x;
+        }
+    if(a[0]== a[1]||a[0]==a[2]||a[0]==a[3]||a[1]== a[2]||a[1]==a[3]||a[2]== a[3] ){
+        k++;
+        y=k;
+        }
+        else{
+             break;
+        }
+}
+cout<<k;
+}
