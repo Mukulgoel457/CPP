@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define pb push_back
+using namespace std;
+
+int main(){
+    ll t;
+    cin>>t;
+    set<ll> s;
+    for(ll i=0;i<100;i++){
+        for(ll j=0;j<10;j++){
+            s.insert(i*11+j*111);
+        }
+    }
+    while(t--){
+            ll n;
+    cin>>n;
+        if(n>1099||s.count(n)){
+            cout<<"YES"<<endl;
+        }
+        else{cout<<"NO"<<endl;}
+    }
+}
