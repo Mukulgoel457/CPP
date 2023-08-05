@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define pb push_back
+using namespace std;
+
+int main(){
+    ll t;
+    cin>>t;
+    while(t--){
+        string s;
+        ll k=0,maxa=-1;
+        cin>>s;
+        for(ll i=0;i<s.length();i++){
+            if(s[i]=='L'){
+                k++;
+            }
+            else{
+                    k=0;
+            }
+        maxa=max(maxa,k);
+        }
+        cout<<maxa+1<<endl;;
+    }
+}
