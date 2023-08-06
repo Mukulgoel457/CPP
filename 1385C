@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define pb push_back
+using namespace std;
+
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        for(int i = 0; i < n; i++){
+            cin >> a[i];
+        }
+        int peak = n - 1;
+        while(peak > 0 && a[peak - 1] >= a[peak]){
+            peak--;
+        }
+        while(peak > 0 && a[peak - 1] <= a[peak]){
+            peak--;
+        }
+        cout << peak << "\n";
+    }
+    return 0;
+}
