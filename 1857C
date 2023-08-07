@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define pb push_back
+using namespace std;
+
+int main(){
+    ll t;
+    cin >> t;
+    while(t--){
+        ll n,x;
+        cin>>n;
+        ll a=(n*(n-1))/2;
+        vector<ll> v;
+        for(ll i=0;i<a;i++){
+            cin>>x;
+            v.pb(x);
+        }
+        sort(v.begin(),v.end());
+        a=n-1;
+        ll i=0;
+        while(a>0){
+          cout<<v[i]<<" ";
+          i+=a;
+          a--;
+          if(a==0){cout<<v[i-1]<<endl;}
+        }
+    }
+}
