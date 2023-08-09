@@ -1,0 +1,46 @@
+//Jaane kyu...jaane kyu????
+//
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "Yes\n"
+#define pno cout << "No\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+
+void solve(){
+
+}
+
+ int main(){
+     ll n,x,sum=0,sol=0;
+     cin>>n;
+     vll v;
+     v.pb(0);
+     for(ll i=0;i<n;i++){
+        cin>>x;
+        v.pb(x);
+        sum+=v[i]-v[i+1];
+        if(sum<0){
+            sol +=abs(sum);
+            sum=0;
+        }
+     }
+        cout<<sol<<endl;
+ }
