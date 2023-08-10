@@ -1,0 +1,56 @@
+//Jaane kyu...jaane kyu????
+//
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "Yes\n"
+#define pno cout << "No\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+
+void solve(){
+}
+int main() {
+   ll n, k, x, i, z = 0;
+   cin >> n >> k >> x;
+   vector < ll > v, a;
+   for (ll i = 0; i < n; i++) {
+      ll elem;
+       cin >> elem;
+      v.pb(elem);
+   }
+   srt(v);
+   for (ll i = 1; i < n; i++) {
+      if (v[i] - v[i - 1] <= x){continue;}
+      else {a.push_back(v[i] - v[i - 1] - 1);}
+   }
+   srt(a);
+   for (ll i = 0; i < a.size(); i++) {
+      ll d = a[i];
+      ll p = d / x;
+      k -= p;
+      if (k >= 0) continue;
+      else {
+         z = a.size() - i;
+         break;
+      }
+   }
+   cout << z + 1 << endl;
+
+}
