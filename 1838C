@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define pb push_back
+using namespace std;
+void solve(){
+    ll n,m;
+    cin>>n>>m;
+    ll a[n][m],z=1;
+    for(ll i=1;i<n;i+=2){
+        for(ll j=0;j<m;j++){
+            a[i][j]=z;
+            z++;
+        }
+    }
+    for(ll i=0;i<n;i+=2){
+        for(ll j=0;j<m;j++){
+            a[i][j]=z;
+            z++;
+        }
+    }
+    for(ll i=0;i<n;i++){
+        for(ll j=0;j<m;j++){
+            cout<<a[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+
+int main(){
+    ll t=1;
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
