@@ -1,0 +1,58 @@
+//Jaane kyu...jaane kyu????
+//
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define th third
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+
+void solve(){
+    ll x,y;
+    cin>>x>>y;
+    float j=sqrt(x*x+y*y);
+    if(j==(int)j){cout<<"black";return;}
+    if(x==0||y==0){cout<<"black";return;}
+    vector<pair<ll,string>> v;
+    for(ll i=1;i<=1500;i++){
+        if(i%2==0){v.pb(make_pair(i*i,"white"));}
+        else{v.pb(make_pair(i*i,"black"));}
+    }
+    ll dis=x*x+y*y,z=0;
+    for(ll i=0;i<v.size();i++){
+        if(dis<=v[i].fi){
+            z=i;
+            break;
+        }
+    }
+    if(x<0&&y>0){cout<<v[z-1].se<<endl;return;}
+    else if(x>0&&y<0){cout<<v[z-1].se<<endl;return;}
+    else{cout<<v[z].se;return;}
+}
+
+
+int main(){
+    ll t=1;
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
