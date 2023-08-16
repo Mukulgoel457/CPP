@@ -1,0 +1,63 @@
+//Jaane kyu...jaane kyu????
+//
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define th third
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+
+void solve(){
+    ll n,t;
+    cin>>n>>t;
+    map<ll,ll> m,y;
+    if(n%5>0){m[1]=n/5+1;}
+    else{m[1]=n/5;}
+    if(n%5>1){m[2]=n/5+1;}
+    else{m[2]=n/5;}
+    if(n%5>2){m[3]=n/5+1;}
+    else{m[3]=n/5;}
+    if(n%5>3){m[4]=n/5+1;}
+    else{m[4]=n/5;}
+    if(n%5>=0){m[5]=n/5;}
+    else{m[5]=n/5;}
+    if(t%5>0){y[1]=t/5+1;}
+    else{y[1]=t/5;}
+    if(t%5>1){y[2]=t/5+1;}
+    else{y[2]=t/5;}
+    if(t%5>2){y[3]=t/5+1;}
+    else{y[3]=t/5;}
+    if(t%5>3){y[4]=t/5+1;}
+    else{y[4]=t/5;}
+    if(t%5>=0){y[5]=t/5;}
+    else{y[5]=t/5;}
+    ll sum=m[1]*y[4]+m[2]*y[3]+m[3]*y[2]+m[4]*y[1]+m[5]*y[5];
+    cout<<sum<<endl;
+}
+
+
+int main(){
+     ll t=1;
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
