@@ -1,0 +1,66 @@
+//Jaane kyu...jaane kyu????
+//
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define th third
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+void solve(){
+    ll n,k,t=0;
+    cin>>n>>k;
+    vp v;
+    for(ll i=0;i<n;i++){
+        ll a,b;
+        cin>>a>>b;
+        v.pb(make_pair(a,b));
+    }
+    for(ll i=0;i<n;i++){
+        for(ll j=i+1;j<n;j++){
+            if(v[i].fi<v[j].fi){
+                swap(v[i],v[j]);
+            }
+            else if(v[i].fi==v[j].fi&&v[i].se>v[j].se){
+                swap(v[i],v[j]);
+            }
+        }
+    }
+    for(ll i=0;i<n;i++){
+        if(v[i].fi==v[k-1].fi&&v[i].se==v[k-1].se){
+            t++;
+        }
+    }
+    cout<<t<<endl;
+}
+
+int main(){
+    ll t=1;
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
