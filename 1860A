@@ -1,0 +1,60 @@
+//Jaane kyu...jaane kyu????
+//
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define th third
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+
+void solve(){
+    string s;
+         cin >> s;
+          ll n = s.length();
+
+         string A = string(n, '(') + string(n, ')');
+          string B = "";
+        ll count = n;
+          while(count--)
+            B = B+ "()";
+
+        if
+        (A.find(s) == string::npos){
+            pyes;
+            cout << A << endl;
+        }
+        else if (B.find(s) == string::npos){
+                pyes;
+            cout << B << endl;
+        }
+        else{
+            pno;
+        }
+}
+
+
+int main(){
+    ll t=1;
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
