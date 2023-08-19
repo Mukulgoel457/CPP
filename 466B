@@ -1,0 +1,90 @@
+//Jaane kyu...jaane kyu????
+//
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+void solve(){
+    int64_t n,a,b,x=0,y=0,mina=INT_MAX;
+    cin>>n>>a>>b;
+    int64_t area=n*6;
+    vp v;
+    if(area<=a*b){
+            cout<<a*b<<endl;
+            cout<<a<<" "<<b<<endl;
+            return;
+    }
+    if(a<=b){
+    for(ll i=a;i*i<=area;i++){
+        if(area%i==0&&area/i>=b){
+            cout<<area<<endl;
+            cout<<i<<" "<<area/i<<endl;
+            return;
+        }
+        else if(area/i+1>=b){
+                v.pb(make_pair(((area/i)+1)*i-area,i));
+}
+    }
+    srt(v);
+    for(ll i=0;i<v.size();i++){
+        if(v[i].fi>=0){
+            cout<<(v[i].fi+area)<<endl;
+            cout<<v[i].se<<" "<<((v[i].fi+area)/v[i].se)<<endl;
+            return;
+        }
+    }
+    }
+    else{
+        for(ll i=b;i*i<=area;i++){
+        if(area%i==0&&area/i>=a){
+            cout<<area<<endl;
+            cout<<area/i<<" "<<i<<endl;
+            return;
+        }
+        else if(area/i+1>=a){
+                v.pb(make_pair(((area/i)+1)*i-area,i));
+}
+    }
+    srt(v);
+    for(ll i=0;i<v.size();i++){
+        if(v[i].fi>=0){
+            cout<<(v[i].fi+area)<<endl;
+            cout<<((v[i].fi+area)/v[i].se)<<" "<<v[i].se<<endl;
+            return;
+        }
+    }
+    }
+}
+
+int main(){
+    ll t=1;
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
