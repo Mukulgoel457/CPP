@@ -1,0 +1,69 @@
+//Jaane kyu...jaane kyu????
+//
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+void solve(){
+    ll n,sump=0,sumv=0;
+    cin>>n;
+    vp v;
+    vll a;
+    for(ll i=0;i<n;i++){
+        ll x;
+        cin>>x;
+        v.pb(make_pair(x,i+1));
+    }
+    srt(v);
+    ll k;
+    cin>>k;
+    for(ll i=0;i<k;i++){
+        ll x;
+        cin>>x;
+        a.pb(x);
+    }
+    srt(a);
+    ll j=0;
+    for(ll i=0;i<n;i++){
+        while(a[j]==v[i].fi){
+            sump+=v[i].se;
+            sumv+=(n-v[i].se+1);
+            j++;
+                    }
+        if(j==k){break;}
+    }
+    cout<<sump<<" "<<sumv<<endl;
+}
+
+int main(){
+    ll t=1;
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
