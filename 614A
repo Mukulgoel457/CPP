@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+long long L,R,K;
+
+long long POW(long long m,long long n)
+{
+    long long b=1;
+     while (n)
+    {
+          if (n & 1)
+             b = (b*m);
+          n = n >> 1 ;
+          m = (m*m);
+    }
+    return b;
+}
+int main()
+{
+    cin>>L>>R>>K;
+    long long tmp1=(log(L)/log(K)+0.1);
+    long long tmp2=(log(R)/log(K)+0.1);
+    if(POW(K,tmp1)<L) tmp1++;
+    if(POW(K,tmp2)>R) tmp2--;
+    if(tmp2<tmp1) printf("-1");
+    else
+    {
+        long long now=POW(K,tmp1);
+        for(long long i=tmp1; i<=tmp2; i++)
+        {
+            cout<<now;
+            now=now*K;
+            if(i<tmp2)cout<<" ";
+            else{cout<<endl;}
+        }
+    }
+    return 0;
+}
