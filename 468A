@@ -1,0 +1,79 @@
+//Jaane kyu...jaane kyu????
+//
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+void solve(){
+    ll n;
+    cin>>n;
+    if(n<4){pno;return;}
+    pyes;
+    if(n%2==0){
+        ll a=2,b=1;
+        while(a<5){
+            cout<<b<<" * "<<a<<" = ";
+            b=a*b;
+            cout<<b<<endl;
+            a++;
+        }
+        ll x=(n-4)/2;
+        while(x--){
+            cout<<a+1<<" - "<<a<<" = 1"<<endl;
+            a+=2;
+            cout<<b<<" * "<<1<<" = "<<b<<endl;
+        }
+        return;
+    }
+    else{
+       ll a=1,b=5;
+        while(a<3){
+            cout<<b<<" - "<<a<<" = "<<b-a<<endl;
+            a++;
+            b--;
+        }
+        cout<<"4 * 2 = 8"<<endl;
+        cout<<"8 * 3 = 24"<<endl;
+        ll x=(n-5)/2;
+        a=6;
+        while(x--){
+            cout<<a+1<<" - "<<a<<" = 1"<<endl;
+            a+=2;
+            cout<<"24 * "<<1<<" = "<<24<<endl;
+        }
+        return;
+    }
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
