@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+#define ll long long
+#define inf 9223372036854775807
+#define iinf 2147483647
+#define PB push_back
+typedef vector<ll> vi;
+typedef vector<pair<ll,ll>> vp;
+typedef vector<char> vc;
+void solve(){
+string s;
+cin>>s;
+int k = s.length();
+int b=0;
+int x=0;
+int mi= k;
+for(int i=0;i<k;i++){
+if(s[i]!='0' && s[i]!='1'){
+    mi = i;
+    break;
+}
+}
+for(int i=mi;i<k;i++){
+s[i] = '1';
+}
+int ans;
+ ans = pow(2,k-1);
+int g=0;
+int r = 1;
+for(int i=k-1;i>0;i--){
+if(s[i]=='1'){
+g+=r;
+}
+r = r*2;
+}
+g++;
+
+cout<<ans+g-1<<endl;
+
+}
+int32_t main(){
+ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+cout.tie(NULL);
+int t=1;
+//cin>>t;
+while(t--){
+solve();
+}
+return 0;
+}
