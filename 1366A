@@ -1,0 +1,79 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1000000007;
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+void solve(){
+    ll a,b,coin=0;
+    cin>>a>>b;
+    if(a>b){
+        ll z=a-b;
+        if(z>=b){
+            print(b);
+        }
+        else if(2*z>=a){
+            print(a/2);
+        }
+        else{
+            b-=z;
+            a-=(2*z);
+            coin+=z;
+            coin+=(2*b/3);
+            print(coin);
+        }
+    }
+    else{
+        ll z=b-a;
+        if(z>=a){
+            print(a);
+        }
+        else if(2*z>=b){
+            print(b/2);
+        }
+        else{
+            a-=z;
+            b-=(2*z);
+            coin+=z;
+            coin+=(2*a/3);
+            
+            print(coin);
+        }
+    }
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
