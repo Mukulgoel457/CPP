@@ -1,0 +1,106 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1000000007;
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+void solve(){
+    ll n,k=0;
+    cin>>n;
+    string s;
+    cin>>s;
+    char r='R';
+    char b='B';
+    char g='G';
+    for(ll i=0;i<n-1;i++){
+        if(s[i]==s[i+1]){
+                k++;
+           if(i==n-2){
+            if(s[i]==r||s[i]==b){
+                s[i+1]=g;
+            }
+            else{
+                 s[i+1]=r;
+             }
+        break;
+           }
+           else{
+            if(s[i+2]==s[i+1]){
+                if(s[i]==r||s[i]==b){
+                s[i+1]=g;
+            }
+            else{
+                 s[i+1]=r;
+             }
+             i++;
+            }
+            else{
+                if(s[i]==b){
+                    if(s[i+2]==g){
+                        s[i+1]=r;
+                    }
+                    else{
+                        s[i+1]=g;
+                    }
+                }
+                else if(s[i]==r){
+                    if(s[i+2]==b){
+                        s[i+1]=g;
+                    }
+                    else{
+                        s[i+1]=b;
+                    }
+                }
+                else if(s[i]==g){
+                    if(s[i+2]==b){
+                        s[i+1]=r;
+                    }
+                    else{
+                        s[i+1]=b;
+                    }
+                }
+            }
+           }
+        }
+    }
+    cout<<k<<endl;
+    for(ll i=0;i<n;i++){
+        cout<<s[i];
+    }
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
