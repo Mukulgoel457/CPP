@@ -1,0 +1,70 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+ll mod = 1e9+7;
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+void solve(){
+    ll n,k,a,b,mina=INT_MAX,t=INT_MAX,f=INT_MAX;
+    cin>>n>>k>>a>>b;
+    vp v;
+    for(ll i=0;i<n;i++){
+        ll x,y;
+        cin>>x>>y;
+        v.pb({x,y});
+    }
+    if(a<=k&&b<=k){
+        print(0);
+    }
+    else{
+        ll z=abs(v[a-1].fi-v[b-1].fi)+abs(v[a-1].se-v[b-1].se);
+        mina=z;
+        f=z;
+        t=z;
+        for(ll i=0;i<k;i++){
+            f=min(f,(abs(v[i].fi-v[a-1].fi)+abs(v[i].se-v[a-1].se)));
+            t=min(t,(abs(v[i].fi-v[b-1].fi)+abs(v[i].se-v[b-1].se)));
+        }
+        if(k==0){print(mina);}
+        else{
+        mina=min(z,f+t);
+        print(mina);
+        }
+    }
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
