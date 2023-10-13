@@ -1,0 +1,144 @@
+//May the code be with you!
+//
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define MAX 200005
+#define bitscount 32
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+// Array to store bit-wise
+// prefix count
+int prefix_count[bitscount][MAX];
+
+// Function to find the prefix sum
+void findPrefixCount(ll arr[], ll n)
+{
+
+    // Loop for each bit
+    for (int i = 0; i < bitscount; i++) {
+
+        // Loop to find prefix count
+        prefix_count[i][0] = ((arr[0] >> i) & 1);
+        for (int j = 1; j < n; j++) {
+            prefix_count[i][j] = ((arr[j] >> i) & 1);
+            prefix_count[i][j] += prefix_count[i][j - 1];
+        }
+    }
+}
+
+bool is_prime[1000005];
+void sieve_of_eratosthenes(int n)
+{
+    memset(is_prime, true, sizeof(is_prime));
+    is_prime[0] = is_prime[1] = false;
+    for (int p = 2; p * p <= n; p++) {
+        if (is_prime[p]) {
+            for (int i = p * p; i <= n; i += p) {
+                is_prime[i] = false;
+            }
+        }
+    }
+}
+
+// Function to answer query
+ll rangeAnd(ll l, ll r)
+{
+    // To store the answer
+    ll ans = 0;
+
+    // Loop for each bit
+    for (ll i = 0; i < bitscount; i++) {
+        // To store the number of variables
+        // with ith bit set
+        ll x;
+        if (l == 0)
+            x = prefix_count[i][r];
+        else
+            x = prefix_count[i][r]
+                - prefix_count[i][l - 1];
+
+        // Condition for ith bit
+        // of answer to be set
+        if (x == r - l + 1)
+            ans = (ans | (1 << i));
+    }
+
+    return ans;
+}
+
+int binary(const std::vector<ll>& arr, ll target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2; // Prevents potential overflow
+
+         if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
+
+void solve(){
+    ll n;
+    cin>>n;
+    vll v;
+    map<ll,ll> m;
+    for(ll i=0;i<n;i++){
+        ll x;
+        cin>>x;
+        v.pb(x);
+    }
+    srt(v);
+    for(ll i=0;i<n;i++){
+            ll z=v[i];
+        for(ll j=2;j*j<=v[i];j++){
+            while(z%j==0 && !is_prime[z]){
+                m[j]++;
+                z/=j;
+            }
+        }
+        m[z]++;
+    }
+    for(auto x:m){
+        if(x.fi>1 && x.se%n != 0){
+            pno;
+            return;
+        }
+    }
+    pyes;
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    sieve_of_eratosthenes(1000000);
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
