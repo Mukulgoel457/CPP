@@ -1,0 +1,83 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+#include<chrono>
+using namespace std;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll N = 2e5;
+vll g[N],v;
+bool vis[N];
+
+ll dfs(ll vertex, ll k, ll z, ll m){
+    vis[vertex] = true;
+    ll ans=0;
+    if(v[vertex]==1){
+        k++;
+        if(k>m){
+            return ans;
+        }
+    }
+    else{
+        k=0;
+    }
+    if(g[vertex].size()==1 && vertex!=0){
+        return ans+1;
+    }
+    for(auto child : g[vertex]){
+        if(vis[child]) continue;
+        z+=dfs(child,k,ans,m);
+    }
+    return z;
+}
+
+void solve(){
+    ll a,b,k;
+    cin>>a>>b>>k;
+    map<ll,ll> boy,girl;
+    ll z[k][2];
+    for(ll i=0;i<k;i++){
+        cin>>z[i][0];
+        boy[z[i][0]]++;
+    }
+    for(ll i=0;i<k;i++){
+        cin>>z[i][1];
+        girl[z[i][1]]++;
+    }
+    ll ans=0;
+    for(ll i=0;i<k;i++){
+        ans+=(k-boy[z[i][0]]-girl[z[i][1]]+1);
+    }
+    print(ans/2);
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
