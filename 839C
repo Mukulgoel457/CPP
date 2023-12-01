@@ -1,0 +1,65 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+#include<chrono>
+using namespace std;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll N = 2e5;
+vll g[N];
+bool vis[N];
+
+double dfs(ll vertex, ll p){
+    vis[vertex] = true;
+    double sum=0;
+    for(auto child : g[vertex]){
+        if(child!=p){
+        sum+=dfs(child,vertex)+1;
+        }
+    }
+    return sum ? sum/(g[vertex].size() - (p!=-1)) : 0;
+}
+
+void solve(){
+    ll n;
+    cin>>n;
+    for(ll i=0;i<n-1;i++){
+        ll a,b;
+        cin>>a>>b;
+        g[a-1].pb(b-1);
+        g[b-1].pb(a-1);
+    }
+    double ans=dfs(0,-1);
+    cout<<setprecision(12)<<ans<<endl;
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
