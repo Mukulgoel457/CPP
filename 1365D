@@ -1,0 +1,113 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+#include<chrono>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "Yes\n"
+#define pno cout << "No\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll N = 2e5;
+vp bad,good;
+char arr[51][51];
+
+void dfs(ll row, ll column){
+    arr[row][column]='0';
+        if(arr[row+1][column]=='.' || arr[row+1][column]=='G'){
+            dfs(row+1,column);
+        }
+        if((arr[row-1][column]=='.' || arr[row-1][column]=='G') && row>0){
+            dfs(row-1,column);
+        }
+        if(arr[row][column+1]=='.' || arr[row][column+1]=='G'){
+            dfs(row,column+1);
+        }
+        if((arr[row][column-1]=='.' || arr[row][column-1]=='G') && column>0){
+            dfs(row,column-1);
+        }
+        return;
+}
+
+void solve(){
+    for(ll i=0;i<51;i++){
+        for(ll j=0;j<51;j++){
+            arr[i][j]='#';
+        }
+    }
+    good.clear();
+    bad.clear();
+    ll r,c;
+    cin>>r>>c;
+    for(ll i=0;i<r;i++){
+        for(ll j=0;j<c;j++){
+            cin>>arr[i][j];
+            if(arr[i][j]=='G'){
+                good.pb({i,j});
+            }
+            if(arr[i][j]=='B'){
+                bad.pb({i,j});
+            }
+        }
+    }
+    if(good.size()==0){
+        pyes;
+        return;
+    }
+    for(ll i=0;i<bad.size();i++){
+        arr[bad[i].fi][bad[i].se]='#';
+        arr[bad[i].fi+1][bad[i].se]='#';
+        if(bad[i].fi>0) arr[bad[i].fi-1][bad[i].se]='#';
+        arr[bad[i].fi][bad[i].se+1]='#';
+        if(bad[i].se>0) arr[bad[i].fi][bad[i].se-1]='#';
+    }
+    if(arr[r-1][c-1]=='#'){
+        pno;
+        return;
+    }
+    else{
+        for(ll i=0;i<good.size();i++){
+            if(arr[good[i].fi][good[i].se]=='#'){
+                pno;
+                return;
+            }
+        }
+        dfs(r-1,c-1);
+        for(ll i=0;i<good.size();i++){
+            if(arr[good[i].fi][good[i].se]!='0'){
+                pno;
+                return;
+            }
+        }
+    }
+    pyes;
+    return;
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
