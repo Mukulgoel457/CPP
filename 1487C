@@ -1,0 +1,89 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+#include<chrono>
+using namespace std;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll N = 2e5;
+vll g[N],v;
+bool vis[N];
+
+void dfs(ll vertex){
+    vis[vertex] = true;
+    ll mina = INT_MAX;
+    for(auto child : g[vertex]){
+        if(vis[child]) continue;
+        mina=min(mina,child);
+    }
+    if(!vis[mina] && mina!=INT_MAX){
+            v.pb(mina);
+            dfs(mina);
+    }
+    return;
+}
+
+void solve(){
+    ll n;
+    cin>>n;
+    if(n%2!=0){
+        for(ll i=0;i<(n*(n-1))/2;i++){
+            if(i%2==0){
+                printb(1);
+            }
+            else{
+                printb(-1);
+            }
+        }
+        ce;
+    }
+    else{
+        ll a=(n*(n-1))/2;
+        ll k=a/n;
+        for(ll i=1;i<n;i++){
+            for(ll j=0;j<n-i;j++){
+                if(j<k){
+                    printb(1);
+                }
+                else if(j==k){
+                    printb(0);
+                }
+                else{
+                    printb(-1);
+                }
+            }
+        }
+        ce;
+    }
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
