@@ -1,0 +1,101 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+#include<chrono>
+using namespace std;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll N = 2e5;
+vll g[N],v;
+bool vis[N];
+
+void dfs(ll vertex){
+    vis[vertex] = true;
+    ll mina = INT_MAX;
+    for(auto child : g[vertex]){
+        if(vis[child]) continue;
+        mina=min(mina,child);
+    }
+    if(!vis[mina] && mina!=INT_MAX){
+            v.pb(mina);
+            dfs(mina);
+    }
+    return;
+}
+
+void solve(){
+    ll n,x;
+    cin>>n>>x;
+    vp a;
+    int c[n]={0};
+    vll b;
+    for(ll i=0;i<n;i++){
+        ll y;
+        cin>>y;
+        a.pb({y,i});
+    }
+    for(ll i=0;i<n;i++){
+        ll y;
+        cin>>y;
+        b.pb(y);
+    }
+    srt(a);
+    srt(b);
+    for(ll i=0;i<n;i++){
+        c[(a[(i+n-x)%n].se)]=b[i];
+    }
+    ll k=0;
+    for(ll i=0;i<n;i++){
+        swap(a[i].fi,a[i].se);
+    }
+    srt(a);
+    for(ll i=0;i<n;i++){
+        swap(a[i].fi,a[i].se);
+    }
+    for(ll i=0;i<n;i++){
+        if(a[i].fi>c[i]){
+            k++;
+        }
+    }
+    if(k==x){
+        pyes;
+        for(ll i=0;i<n;i++){
+            printb(c[i]);
+        }
+        ce;
+    }
+    else{
+        pno;
+    }
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
