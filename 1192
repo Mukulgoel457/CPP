@@ -1,0 +1,85 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+#include<chrono>
+using namespace std;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll N = 1e3+1;
+char g[N][N];
+bool vis[N][N];
+
+void dfs(ll x,ll y, ll parx=-1,ll pary=-1){
+    vis[x][y] = true;
+    if(g[x+1][y]=='.' && !vis[x+1][y] && !(x+1==parx && y==pary)){
+        dfs(x+1,y,x,y);
+    }
+    if(g[x-1][y]=='.' && !vis[x-1][y] && !(x-1==parx && y==pary) && x>0){
+        dfs(x-1,y,x,y);
+    }
+    if(g[x][y+1]=='.' && !vis[x][y+1] && !(x==parx && y+1==pary)){
+        dfs(x,y+1,x,y);
+    }
+    if(g[x][y-1]=='.' && !vis[x][y-1] && !(x==parx && y-1==pary) && y>0){
+        dfs(x,y-1,x,y);
+    }
+    return;
+}
+
+
+void solve(){
+    ll n,m;
+    for(ll i=0;i<N;i++){
+        for(ll j=0;j<N;j++){
+            g[i][j]='#';
+            vis[i][j]=false;
+        }
+    }
+    cin>>n>>m;
+    for(ll i=0;i<n;i++){
+        for(ll j=0;j<m;j++){
+            cin>>g[i][j];
+        }
+    }
+    ll ans=0;
+    for(ll i=0;i<n;i++){
+        for(ll j=0;j<m;j++){
+            if(g[i][j]=='.' && !vis[i][j]){
+                dfs(i,j);
+                ans++;
+            }
+        }
+    }
+    print(ans);
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
