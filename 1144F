@@ -1,0 +1,91 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+#include<chrono>
+using namespace std;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll N = 2e5+5;
+vll g[N];
+bool vis[N];
+ll pare[N];
+
+void dfs(ll vertex){
+    vis[vertex] = true;
+    for(auto child : g[vertex]){
+        if(vis[child]) continue;
+        if(pare[vertex]){
+            pare[child]=0;
+        }
+        else{
+            pare[child]=1;
+        }
+        dfs(child);
+    }
+    return;
+}
+
+
+
+void solve(){
+    for(ll i=0;i<N;i++) pare[i]=0;
+    ll n,m;
+    cin>>n>>m;
+    vp v;
+    for(ll i=0;i<m;i++){
+        ll x,y;
+        cin>>x>>y;
+        v.pb({x,y});
+        g[x].pb(y);
+        g[y].pb(x);
+    }
+    pare[1]=1;
+    dfs(1);
+    for(ll i=0;i<m;i++){
+        if(pare[v[i].fi]==pare[v[i].se]){
+            pno;
+            return;
+        }
+    }
+    pyes;
+    for(ll i=0;i<m;i++){
+        if(pare[v[i].fi]){
+            cout<<0;
+        }
+        else{
+            cout<<1;
+        }
+    }
+    return;
+}
+
+int main(){
+    ll t=1;
+    ios::sync_with_stdio(false);
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
