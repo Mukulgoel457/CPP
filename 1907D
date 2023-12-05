@@ -1,0 +1,75 @@
+//May the code be with you!
+
+#include <bits/stdc++.h>
+using namespace std;
+template <typename PB>
+#define ll long long int
+#define be begin()
+#define MAX 200005
+#define bitscount 32
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+const ll mod = 1e9 + 7;
+
+bool isValid(const vector<pair<ll, ll>>& inter, ll k){
+    ll mina=0,maxa= 0;
+    for (const auto& interval : inter){
+        mina=max(mina,interval.fi);
+        maxa=min(maxa+k,interval.se);
+        if (mina>maxa){
+            return false;
+        }
+        mina=max(int(mina-k),0);
+    }
+    return true;
+}
+
+ll findMinimumK(const vector<pair<ll, ll>>& inter){
+    ll lower = 0, higher = 1e9;
+    while (lower<higher){
+        ll k = (lower+higher)/2;
+        if (isValid(inter, k)){
+            higher=k;
+        }
+        else{
+            lower=k+1;
+        }
+    }
+    return lower;
+}
+
+int main(){
+    ll t;
+    cin>>t;
+    ll i = 0;
+    while (i<=t-1) {
+        ll a;
+        cin>>a;
+        vp intervals(a);
+        ll j = 0;
+        while(j < a){
+            cin>>intervals[j].fi>>intervals[j].se;
+            j++;
+        }
+        ll ans= findMinimumK(intervals);
+        cout<<ans<<endl;
+        i++;
+    }
+}
