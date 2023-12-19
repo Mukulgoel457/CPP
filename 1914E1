@@ -1,0 +1,93 @@
+//May the code be with you!
+
+
+#include <bits/stdc++.h>
+#include<chrono>
+using namespace std;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+ll mod = 1e9 + 7;
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+int binary(const std::vector<ll>& arr, ll target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2; // Prevents potential overflow
+
+         if (arr[mid] < target) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
+
+ll ciel(ll a,ll b){
+    if(a%b){return a/b+1;}
+    else{return a/b;}
+}
+
+void solve(){
+    ll n;
+    cin>>n;
+    vll a,b;
+    for(ll i=0;i<n;i++){
+        ll x;
+        cin>>x;
+        a.pb(x);
+    }
+    for(ll i=0;i<n;i++){
+        ll x;
+        cin>>x;
+        b.pb(x);
+    }
+    vp v;
+    for(ll i=0;i<n;i++){
+            v.pb({a[i]+b[i],i});
+    }
+    srt(v);
+    ll ans=0,x=0;
+    for(ll i=n-1;i>=0;i--){
+        if(x%2==0) ans+=a[v[i].second]-1;
+        else ans-=b[v[i].second]-1;
+        x++;
+    }
+    print(ans);
+}
+
+int main(){
+    int t=1;
+    ios::sync_with_stdio(false);
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
