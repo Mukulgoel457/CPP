@@ -1,0 +1,123 @@
+//------------------Mukul457-----------------------------------
+
+#include <bits/stdc++.h>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
+
+ll mod = 1e9 + 7;
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+int binary(const std::vector<ll>& arr, ll target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2; // Prevents potential overflow
+
+         if (arr[mid] < target) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
+
+ll ciel(ll a,ll b){
+    if(a%b){return a/b+1;}
+    else{return a/b;}
+}
+class table {
+	public:
+
+	int id;
+	int size;
+};
+
+bool byIncomeDescending(const vector<ll> g1, const vector<ll> g2) {
+	return g1[1] > g2[1];
+}
+
+bool bySize(const table &t1, const table &t2) {
+	return t1.size < t2.size;
+}
+
+bool canFit(const table &t, const vector<ll> g) {
+	return t.size < g[0];
+}
+
+void solve(){
+    ll m;
+    cin>>m;
+    vector<vll> v;
+    for(ll i=0;i<m;i++){
+        ll x,y;
+        cin>>x>>y;
+        v.pb({x,y,i+1});
+    }
+    sort(all(v),byIncomeDescending);
+    ll n;
+    cin>>n;
+    vector<table> tables(n);
+    for(ll i=0;i<n;i++){
+        tables[i].id = i+1;
+        cin>>tables[i].size;
+    }
+    sort(all(tables),bySize);
+    ll ans=0;
+    vp order;
+    for(ll i=0;i<m;i++){
+        auto group = v[i];
+        auto tableToGive = lower_bound(all(tables),group,canFit);
+		if (tableToGive == tables.end()) continue;
+		ans += group[1];
+		order.push_back(make_pair(group[2], tableToGive->id));
+		tables.erase(tableToGive);
+    }
+    printb(order.size());
+    print(ans);
+    srt(order);
+    for(ll i=0;i<order.size();i++){
+        printb(order[i].fi);
+        print(order[i].se);
+    }
+}
+
+int main(){
+    int t=1;
+    ios::sync_with_stdio(false);
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
