@@ -1,0 +1,115 @@
+//------------------Mukul457-----------------------------------
+
+#include <bits/stdc++.h>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
+
+ll mod = 1e9 + 7;
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+bool isvalid(ll x,ll y,ll n,ll m){
+    return x>=0 && y>=0 && x<n && y<m ;
+}
+
+int binary(const std::vector<ll>& arr, ll target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2; // Prevents potential overflow
+
+         if (arr[mid] < target) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
+
+ll ciel(ll a,ll b){
+    if(a%b){return a/b+1;}
+    else{return a/b;}
+}
+
+void solve(){
+    ll a,b;
+    cin>>a>>b;
+    ll k=max(a,b);
+    multiset<ll> s1,s2;
+    for(ll i=1;i*i<=k;i++){
+        if(a%i==0){
+            s1.insert(i);
+            s1.insert(a/i);
+        }
+        if(b%i==0){
+            s2.insert(i);
+            s2.insert(b/i);
+        }
+    }
+    vll ans;
+    while(s1.size()>0 && s2.size()>0){
+        ll x=*s1.begin();
+        ll y=*s2.begin();
+        if(x==y){
+            ans.pb(x);
+            s1.erase(*s1.begin());
+            s2.erase(*s2.begin());
+        }
+        else if(x<y){
+            s1.erase(*s1.begin());
+        }
+        else if(x>y){
+            s2.erase(*s2.begin());
+        }
+    }
+    ll q;
+    cin>>q;
+    while(q--){
+        ll x,y;
+        cin>>x>>y;
+        auto lower = lower_bound(ans.begin(),ans.end(),y);
+        while((lower!=ans.begin() && *lower>y)||lower==ans.end()) lower--;
+        if(*lower>=x && *lower<=y) print(*lower);
+        else print(-1);
+    }
+}
+
+int main(){
+    int t=1;
+    ios::sync_with_stdio(false);
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
