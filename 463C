@@ -1,0 +1,122 @@
+//------------------Mukul457-----------------------------------
+
+#include <bits/stdc++.h>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+typedef tree<ll,null_type,less_equal<ll>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
+
+ll mod = 1e9 + 7;
+const int inf= 1e18;
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+bool isvalid(ll x,ll y,ll n,ll m){
+    return x>=0 && y>=0 && x<n && y<m ;
+}
+
+int binary(const std::vector<ll>& arr, ll target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2; // Prevents potential overflow
+
+         if (arr[mid] < target) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
+
+ll ciel(ll a,ll b){
+    if(a%b){return a/b+1;}
+    else{return a/b;}
+}
+
+void solve(){
+    ll n,x,y,maxa=-1,maxb=-1,i1,i2,j1,j2;
+    cin>>n;
+    ll a[n][n],b[n][n],d[2*n-1],c[2*n-1];
+    for(ll i=0;i<n;i++){
+        for(ll j=0;j<n;j++){
+            cin>>a[i][j];
+        }
+    }
+    for(ll i=0;i<n;i++){
+            ll z=0;x=i;y=0;
+            while(x<n && x>=0 && y<n && y>=0){
+               z+=a[x][y];x++;y++;
+            }
+            c[n-i-1]=z;
+            z=0;x=i;y=0;
+            while(x<n && x>=0 && y<n && y>=0){
+                z+=a[x][y];x--;y++;
+            }
+          d[i]=z;
+          z=0;x=0;y=i;
+            while(x<n && x>=0 && y<n && y>=0){
+               z+=a[x][y];x++;y++;
+            }
+            c[n+i-1]=z;
+            z=0;x=n-1;y=i;
+            while(x<n && x>=0 && y<n && y>=0){
+                z+=a[x][y];x--;y++;
+            }
+          d[n-1+i]=z;
+    }
+    for(ll i=0;i<n;i++){
+        for(ll j=0;j<n;j++){
+            b[i][j]=c[n-i+j-1]+d[i+j]-a[i][j];
+            if(((i+j)%2)==0){
+                maxa=max(maxa,b[i][j]);
+                if(b[i][j]==maxa){i1=i;j1=j;}
+            }
+            if(((i+j)%2)==1){
+                maxb=max(maxb,b[i][j]);
+                if(b[i][j]==maxb){i2=i;j2=j;}
+            }
+        }
+    }
+    print(maxa+maxb);
+    printb(i1+1);printb(j1+1);printb(i2+1);print(j2+1);
+}
+
+int main(){
+    int t=1;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
