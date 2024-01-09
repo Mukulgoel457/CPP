@@ -1,0 +1,151 @@
+//------------------Mukul457-----------------------------------
+
+#include <bits/stdc++.h>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+#define trav(v) for (auto it = v.begin(); it != v.end(); it++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
+typedef tree<ll,null_type,less_equal<ll>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
+
+ll mod = 1e9 + 7;
+const int inf= 1e18;
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+bool isvalid(ll x,ll y,ll n,ll m){
+    return x>=0 && y>=0 && x<n && y<m ;
+}
+
+int binary(const std::vector<ll>& arr, ll target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2; // Prevents potential overflow
+
+         if (arr[mid] < target) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
+
+ll ciel(ll a,ll b){
+    if(a%b){return a/b+1;}
+    else{return a/b;}
+}
+
+void solve(){
+    ll n;
+    cin>>n;
+    vll v(n),ans;
+    for(ll i=0;i<n;i++){
+        cin>>v[i];
+    }
+    srt(v);
+    if(n==1){
+        print(-1);
+        return;
+    }
+    else if(n==2){
+        if(v[0]==v[1]){
+                ans.pb(v[0]);
+        }
+        else if(v[0]%2==v[1]%2){
+            ans.pb((v[0]+v[1])/2);
+            ans.pb(2*v[0]-v[1]);
+            ans.pb(2*v[1]-v[0]);
+        }
+        else{
+            ans.pb(2*v[0]-v[1]);
+            ans.pb(2*v[1]-v[0]);
+        }
+    }
+    else{
+        map<ll,ll> m;
+        for(ll i=1;i<n;i++){
+            m[v[i]-v[i-1]]++;
+        }
+        if(m.size()>2){
+            print(0);
+            return;
+        }
+        else if(m.size()==2){
+            ll k=0,t=-1;
+            for(auto x:m){
+                if(x.se>1){
+                    k++;
+                }
+                else t=x.fi;
+            }
+            if(k>1){
+                print(0);
+                return;
+            }
+            else{
+                if(t%2!=0 || t==0 || m[t/2]==0){
+                    print(0);
+                    return;
+                }
+                else{
+                    for(ll i=0;i<n-1;i++){
+                        if(v[i+1]-v[i]==t){
+                            ans.pb(v[i]+t/2);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            if(v[0]==v[n-1]) ans.pb(v[0]);
+            else{
+                ll k=v[1]-v[0];
+                ans.pb(v[0]-k);
+                ans.pb(v[n-1]+k);
+            }
+        }
+    }
+    print(ans.size());
+    srt(ans);
+    for(ll i=0;i<ans.size();i++) printb(ans[i]);
+    ce;
+}
+
+int main(){
+    int t=1;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    //cin>>t;
+    while(t--){
+        solve();
+    }
+}
