@@ -1,0 +1,78 @@
+//------------------Mukul457-----------------------------------
+
+#include <bits/stdc++.h>
+using namespace std;
+#pragma GCC optimize("Ofast,no-stack-protector")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,tune=native")
+#pragma GCC optimize("unroll-loops")
+//template <typename PB>
+#define ll long long int
+const ll N=1e5+2;
+ll a[150005],seg[400028];
+
+void buildTree(ll node,ll left, ll right, ll pos){
+    if(left == right) {
+        seg[node] = a[left];
+        return;
+    }
+    ll midPos = (left + right) >> 1;
+    ll leftPos = node * 2;
+    ll rightPos = leftPos + 1;
+
+    buildTree(leftPos, left, midPos, pos - 1);
+    buildTree(rightPos, midPos + 1, right, pos - 1);
+    if(pos & 1) seg[node] = (seg[leftPos] | seg[rightPos]);
+    else seg[node] = (seg[leftPos] ^ seg[rightPos]);
+}
+
+void update(ll node,ll left, ll right, ll idx, ll val, ll pos){
+    if(idx>right||idx<left) return;
+    if(left==right && left==idx){
+        seg[node]=val;
+        return;
+    }
+    ll mid = (left+right)/2;
+    update(2*node,left,mid,idx,val,pos-1);
+    update(2*node+1,mid+1,right,idx,val,pos-1);
+    if(pos & 1) seg[node]= (seg[2*node] | seg[2*node+1]);
+    else seg[node] = (seg[2*node] ^ seg[2*node+1]);
+}
+
+/*
+ll query(ll node,ll st,ll en,ll l,ll r){//l and r is range of query
+    if(st>r||en<l){
+        return INT_MIN;
+    }
+
+    if(st>=l && en<=r){
+        return seg[node];
+    }
+
+    ll mid = (st+en)/2;
+
+    ll q1 = query(2*node+1,st, mid, l, r);
+    ll q2 = query(2*node+2,mid+1, en, l, r);
+    return q1+q2;
+}
+*/
+//descending the segment tree according to query
+
+void solve(){
+
+}
+
+int main(){
+    ll x,q;
+    cin>>x>>q;
+    ll n=pow(2,x);
+    for(ll i=1;i<=n;i++){
+        cin>>a[i];
+    }
+    buildTree(1, 1, n, x);
+    while(q--){
+        ll y,z;
+        cin>>y>>z;
+        update(1,1,n,y,z,x);
+        cout<<seg[1]<<endl;
+    }
+}
