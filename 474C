@@ -1,0 +1,178 @@
+//------------------Mukul457-----------------------------------
+
+#include <bits/stdc++.h>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+//template <typename PB>
+#define ll long long int
+#define be begin()
+#define en end()
+#define pb push_back
+#define pyes cout << "YES\n"
+#define pno cout << "NO\n"
+#define ce cout << '\n'
+#define endl '\n'
+#define pie 3.141592653589793238462643383279502884197169399
+#define print(x) cout<<x<<endl
+#define printb(x) cout<<x<<" "
+#define rev(v) reverse(v.begin(), v.end())
+#define srt(v) sort(v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define mnv(v) *min_element(v.begin(), v.end())
+#define mxv(v) *max_element(v.begin(), v.end())
+#define fi first
+#define se second
+#define vll vector<ll>
+#define vp vector<pair<ll,ll>>
+typedef tree<ll,null_type,less_equal<ll>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
+
+ll mod = 1e9 + 7;
+const int inf= 1e18;
+ll gcd(ll a, ll b){
+  if (b == 0) return a;
+  return gcd(b, a%b);
+}
+
+bool isvalid(ll x,ll y,ll n,ll m){
+    return x>=0 && y>=0 && x<n && y<m ;
+}
+
+int binary(const std::vector<ll>& arr, ll target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2; // Prevents potential overflow
+
+         if (arr[mid] < target) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
+
+bool is_prime[1000005];
+void sieve_of_eratosthenes(int n)
+{
+    memset(is_prime, true, sizeof(is_prime));
+    is_prime[0] = is_prime[1] = false;
+    for (int p = 2; p * p <= n; p++) {
+        if (is_prime[p]) {
+            for (int i = p * p; i <= n; i += p) {
+                is_prime[i] = false;
+            }
+        }
+    }
+}
+
+ll ciel(ll a,ll b){
+    if(a%b){return a/b+1;}
+    else{return a/b;}
+}
+
+ll distanceSquared(pair<ll,ll> p1,pair<ll,ll> p2) {
+    return (p1.fi - p2.fi) * (p1.fi - p2.fi) + (p1.se - p2.se) * (p1.se - p2.se);
+}
+
+bool isSquare(vp points){
+    ll d1 = distanceSquared(points[0], points[1]);
+    ll d2 = distanceSquared(points[0], points[2]);
+    ll d3 = distanceSquared(points[0], points[3]);
+    ll d4 = distanceSquared(points[1], points[2]);
+    ll d5 = distanceSquared(points[1], points[3]);
+    ll d6 = distanceSquared(points[2], points[3]);
+    vll v;
+    v.pb(d1);
+    v.pb(d2);
+    v.pb(d3);
+    v.pb(d4);
+    v.pb(d5);
+    v.pb(d6);
+    srt(v);
+    if(v[0]==v[3] && v[5]==v[4] && v[5]==2*v[3] && v[0]>0){
+            return true;
+    }
+    else return false;
+}
+
+void solve(){
+    vp a,b,c,d;
+    for(ll i=0;i<1;i++){
+        ll w,x,y,z;
+        cin>>w>>x>>y>>z;
+        a.pb({w,x});
+        ll x1=w-y;
+        ll x2=x-z;
+        a.pb({y-x2,z+x1});
+        a.pb({y-x1,z-x2});
+        a.pb({y+x2,z-x1});
+    }
+    for(ll i=0;i<1;i++){
+        ll w,x,y,z;
+        cin>>w>>x>>y>>z;
+        b.pb({w,x});
+        ll x1=w-y;
+        ll x2=x-z;
+        b.pb({y-x2,z+x1});
+        b.pb({y-x1,z-x2});
+        b.pb({y+x2,z-x1});
+    }
+    for(ll i=0;i<1;i++){
+        ll w,x,y,z;
+        cin>>w>>x>>y>>z;
+        c.pb({w,x});
+        ll x1=w-y;
+        ll x2=x-z;
+        c.pb({y-x2,z+x1});
+        c.pb({y-x1,z-x2});
+        c.pb({y+x2,z-x1});
+    }
+    for(ll i=0;i<1;i++){
+        ll w,x,y,z;
+        cin>>w>>x>>y>>z;
+        d.pb({w,x});
+        ll x1=w-y;
+        ll x2=x-z;
+        d.pb({y-x2,z+x1});
+        d.pb({y-x1,z-x2});
+        d.pb({y+x2,z-x1});
+    }
+    ll z=100;
+    for(ll i=0;i<4;i++){
+        for(ll j=0;j<4;j++){
+            for(ll k=0;k<4;k++){
+                for(ll l=0;l<4;l++){
+                    vp coordinates;
+                    if(a[i]==b[j] || a[i]==c[k] || a[i]==d[l]) continue;
+                    if(b[j]==c[k] || b[j]==d[l]) continue;
+                    if(c[k] == d[l]) continue;
+                    coordinates.pb(a[i]);
+                    coordinates.pb(b[j]);
+                    coordinates.pb(c[k]);
+                    coordinates.pb(d[l]);
+                    if (isSquare(coordinates)){
+                            z=min(z,i+j+k+l);
+                    }
+
+                }
+            }
+        }
+    }
+    if(z>12) print(-1);
+    else print(z);
+}
+
+int main(){
+    int t=1;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cin>>t;
+    while(t--){
+        solve();
+    }
+}
