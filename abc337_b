@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+bool isExtendedABC(string s) {
+    int countA = 0, countB = 0, countC = 0;
+    bool a=true;
+    for (char ch : s) {
+        if (ch == 'A') {
+            countA++;
+            if(countB>0 || countC>0) a=false;
+        } else if (ch == 'B') {
+            countB++;
+            if(countC>0) a=false;
+        } else if (ch == 'C') {
+            countC++;
+        }
+    }
+
+    return (countA > 0 || countB > 0 || countC > 0) && countA + countB + countC == s.length() && a;
+}
+
+int main() {
+    string s;
+    cin >> s;
+
+    if (isExtendedABC(s)) {
+        cout << "Yes" << endl;
+    } else {
+        cout << "No" << endl;
+    }
+
+    return 0;
+}
