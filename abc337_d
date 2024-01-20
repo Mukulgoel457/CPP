@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+const long long inf=(int)1e7;
+
+using namespace std;
+
+int main() {
+    int H, W, K;
+    cin >> H >> W >> K;
+
+    vector<vector<char>> grid(H, vector<char>(W));
+    vector<vector<int>> horizontalPrefixSum(H, vector<int>(W + 1, 0));
+    vector<vector<int>> verticalPrefixSum(W, vector<int>(H + 1, 0));
+
+    // Read input grid and calculate horizontal and vertical prefix sums
+    for (int i = 0; i < H; ++i) {
+        for (int j = 0; j < W; ++j) {
+            cin >> grid[i][j];
+            if(grid[i][j]=='x'){
+                horizontalPrefixSum[i][j + 1] =horizontalPrefixSum[i][j]+inf;
+                verticalPrefixSum[j][i + 1] =verticalPrefixSum[j][i]+ inf;
+                continue;
+            }
+            horizontalPrefixSum[i][j + 1] = horizontalPrefixSum[i][j] + (grid[i][j] == '.');
+            verticalPrefixSum[j][i + 1] = verticalPrefixSum[j][i] + (grid[i][j] == '.');
+        }
+    }
+
+    int minOperations = inf;
+
+    // Check horizontal consecutive sequence using prefix sum
+    for (int i = 0; i < H; ++i) {
+        for (int j = 0; j <= W - K; ++j) {
+            int emptyCells = horizontalPrefixSum[i][j + K] - horizontalPrefixSum[i][j];
+            if(emptyCells>=inf) continue;
+            int operations = emptyCells;
+            if(operations>=0) minOperations = min(minOperations, operations);
+        }
+    }
+
+    // Check vertical consecutive sequence using prefix sum
+    for (int j = 0; j < W; ++j) {
+        for (int i = 0; i <= H - K; ++i) {
+            int emptyCells = verticalPrefixSum[j][i + K] - verticalPrefixSum[j][i];
+            if(emptyCells>=inf) continue;
+            int operations = emptyCells;
+            if(operations>=0) minOperations = min(minOperations, operations);
+        }
+    }
+
+    if (minOperations >= inf) {
+        cout << -1 << endl;  // No valid sequence found
+    } else {
+        cout << minOperations << endl;
+    }
+
+    return 0;
+}
+
