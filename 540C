@@ -42,15 +42,21 @@ vector<pair<int,int>> movement = {
 };
 
 char g[N3][N3];
+bool vis[N3][N3];
 
-bool dfs(ll x,ll y,ll X,ll Y){
-    if(!isvalid(x,y)) return false;
+void dfs(ll x,ll y,ll X,ll Y){
+    if(!isvalid(x,y)) return;
     if(g[x][y]=='X'){
-        if(x==X && y==Y) return true;
-        else return false;
+        if(x==X && y==Y) vis[x][y]=true;
+        return;
     }
+    //vis[x][y]=true;
     g[x][y]='X';
-    return dfs(x+1,y,X,Y)||dfs(x,y-1,X,Y)||dfs(x,y+1,X,Y)||dfs(x-1,y,X,Y);
+    dfs(x+1,y,X,Y);
+    dfs(x-1,y,X,Y);
+    dfs(x,y+1,X,Y);
+    dfs(x,y-1,X,Y);
+    return;
 }
 
 void solve(){
@@ -64,8 +70,8 @@ void solve(){
     cin>>x>>y>>X>>Y;
     x--,y--,X--,Y--;
     g[x][y]='.';
-    bool a=dfs(x,y,X,Y);
-    if(a) pyes;
+    dfs(x,y,X,Y);
+    if(vis[X][Y]) pyes;
     else pno;
 }
 
