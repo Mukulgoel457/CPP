@@ -1,0 +1,38 @@
+#include <iostream>
+
+using namespace std;
+
+int main(){
+string s;
+long long int B=0,S=0,C=0,k=0;
+cin>>s;
+for(long long int i=0;i<s.length();i++){
+    if(s[i]=='B'){B++;}
+    else if(s[i]=='S'){S++;}
+    else if(s[i]=='C'){C++;}
+}
+long long int n[3],p[3],r;
+cin>>n[0]>>n[1]>>n[2];
+cin>>p[0]>>p[1]>>p[2];
+cin>>r;
+while(r>0){
+    if(n[0]>=B && n[1]>=S && n[2]>=C){
+        k++;
+        n[0]-=B;n[1]-=S;n[2]-=C;
+    }
+   else{
+        if(n[0]==0 && n[1]==0 && n[2]==0){k+=r/(B*p[0]+S*p[1]+C*p[2]);r=-1;cout<<k;return 0;}
+         else{
+             if(B-n[0]>=0 && B>0){r-=(B-n[0])*p[0];n[0]=0;}
+             else if(B==0){n[0]=0;}
+             else{n[0]-=B;}
+             if(S-n[1]>=0 && S>0){r-=(S-n[1])*p[1];n[1]=0;}
+             else if(S==0){n[1]=0;}
+             else{n[1]-=S;}
+             if(C-n[2]>=0 && C>0){r-=(C-n[2])*p[2];n[2]=0;}
+             else if(C==0){n[2]=0;}
+             else{n[2]-=C;}
+                     if(r>=0){k++;}
+             }}}
+    cout<<k<<endl;return 0;
+}
