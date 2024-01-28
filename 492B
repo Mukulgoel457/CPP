@@ -1,0 +1,55 @@
+// Idhar kyu aaya hai be!!
+
+#include <bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define vll vector<ll>
+#define fr(i, a, b) for (ll i = a; i < b; i++)
+#define vi vector<int>
+#define vpll vector<pair<ll, ll>>
+#define vs vector<string>
+#define srt(a) sort(a.begin(), a.end())
+#define rev(a) reverse(a.begin(), a.end())
+#define find(vec, n) find(vec.begin(), vec.end(), n)
+#define el endl
+#define ln length()
+#define fi first
+#define se second
+#define pb push_back
+#define yes YES
+#define no NO
+#define cy cout << yes << endl
+#define cn cout << no << endl
+ll mod = 1e9 + 7;
+
+using namespace std;
+
+void solve()
+{
+    ll n, l;
+    cin >> n >> l;
+    vll a(n);
+    fr(i, 0, n) cin >> a[i];
+    srt(a);
+    ll diff = max(a[0] * 2, (l - a[n - 1]) * 2);
+    fr(i, 0, n - 1)
+    {
+        diff = max(diff, a[i + 1] - a[i]);
+    }
+    cout << fixed << setprecision(10) << diff/2.0 << el;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ll t = 1;
+    // cin>>t;
+    while (t--)
+    {
+        solve();
+    }
+    return 0;
+}
