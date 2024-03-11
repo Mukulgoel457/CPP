@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+#include <vector>
+#include <cstring>
+
+using namespace std;
+
+vector<int> possiblePlayers(int n, int m, int x, vector<pair<int, char>>& throws) {
+    vector<int> players;
+    players.push_back(x);
+
+    for (int i = 0; i < m; ++i) {
+        int r = throws[i].first;
+        char c = throws[i].second;
+
+        if (c == '0') { // Clockwise
+            for (int j = 0; j < players.size(); ++j) {
+                players[j] = (players[j] + r - 1) % n + 1;
+            }
+        } else if (c == '1') { // Counterclockwise
+            for (int j = 0; j < players.size(); ++j) {
+                players[j] = (players[j] - r - 1 + n) % n + 1;
+            }
+        } else { // Unknown direction
+            vector<int> newPlayers;
+            for (int j = 0; j < players.size(); ++j) {
+                newPlayers.push_back((players[j] + r - 1) % n + 1);
+                newPlayers.push_back((players[j] - r - 1 + n) % n + 1);
+            }
+            players = newPlayers;
+        }
+
+        // Remove duplicates
+        sort(players.begin(), players.end());
+        players.erase(unique(players.begin(), players.end()), players.end());
+    }
+
+    return players;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    cout.tie(0);
+    while (t--) {
+        int n, m, x;
+        cin >> n >> m >> x;
+
+        vector<pair<int, char>> throws(m);
+        for (int i = 0; i < m; ++i) {
+            int r;
+            char c;
+            cin >> r >> c;
+            throws[i] = {r, c};
+        }
+
+        vector<int> result = possiblePlayers(n, m, x, throws);
+        cout<<result.size()<<endl;
+        for (int player : result) {
+            cout << player << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
